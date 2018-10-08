@@ -1,3 +1,7 @@
+Attribute VB_Name = "Module1"
+
+
+
 ' In The Name Of Allah
 '  Please Download Last Version From:
 '   http://jdf.scr.ir/jdf/
@@ -5,9 +9,6 @@
 
 
 
-
-
-Attribute VB_Name = "Module1"
 
 ' Gregorian & Jalali ( Hijri_Shamsi , Solar ) Date Converter Functions
 ' Author: JDF.SCR.IR =>> Download Full Version : http://jdf.scr.ir/jdf
