@@ -6,10 +6,20 @@ In The Name Of Allah _ به نام خدا
 
 http://jdf.scr.ir/
 
-
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 Jalali Date Converters (Hijri Shamsi,Iranian,Persian)
 
- Please Download Last Version From:
-  http://jdf.scr.ir/jdf/
-   http://jdf.scr.ir/download/
+Please Download Last Version From:
+
+http://jdf.scr.ir/jdf/
+
+http://jdf.scr.ir/download/
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+حمایت مالی داوطلبانه به مبلغ دلخواه (ریال):
+
+https://scr.ir/pardakht/?hemayat=github
+
+(Donate)
