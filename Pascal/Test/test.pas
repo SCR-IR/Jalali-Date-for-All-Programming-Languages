@@ -160,7 +160,6 @@ End;
 
 
 
-
 var
  tabdil: Char;
  jy,jm,jd,gy,gm,gd,y_in,m_in,d_in: LongInt;
