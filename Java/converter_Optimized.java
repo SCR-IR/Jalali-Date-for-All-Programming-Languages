@@ -1,6 +1,7 @@
 
 package converter;
 
+
 class DateConverter {
 
   /**  Gregorian & Jalali (Hijri_Shamsi,Solar) Date Converter Functions
@@ -13,9 +14,12 @@ class DateConverter {
   1461=(365*4)+(4/4) & 146097=(365*400)+(400/4)-(400/100)+(400/400)  */
 
   public static int[] gregorian_to_jalali(int gy, int gm, int gd) {
-    int[] g_d_m = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
-    int gy2 = (gm > 2) ? (gy + 1) : gy;
-    int days = 355666 + (365 * gy) + ((int) ((gy2 + 3) / 4)) - ((int) ((gy2 + 99) / 100)) + ((int) ((gy2 + 399) / 400)) + gd + g_d_m[gm - 1];
+    int days, jm, jd;
+    {
+      int gy2 = (gm > 2) ? (gy + 1) : gy;
+      int[] g_d_m = { 0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334 };
+      days = 355666 + (365 * gy) + ((int) ((gy2 + 3) / 4)) - ((int) ((gy2 + 99) / 100)) + ((int) ((gy2 + 399) / 400)) + gd + g_d_m[gm - 1];
+    }
     int jy = -1595 + (33 * ((int) (days / 12053)));
     days %= 12053;
     jy += 4 * ((int) (days / 1461));
@@ -24,8 +28,13 @@ class DateConverter {
       jy += (int) ((days - 1) / 365);
       days = (days - 1) % 365;
     }
-    int jm = (days < 186) ? 1 + (int) (days / 31) : 7 + (int) ((days - 186) / 30);
-    int jd = 1 + ((days < 186) ? (days % 31) : ((days - 186) % 30));
+    if (days < 186) {
+      jm = 1 + (int)(days / 31);
+      jd = 1 + (days % 31);
+    } else {
+      jm = 7 + (int)((days - 186) / 30);
+      jd = 1 + ((days - 186) % 30);
+    }
     int[] jalali = { jy, jm, jd };
     return jalali;
   }
@@ -47,13 +56,16 @@ class DateConverter {
       gy += (int) ((days - 1) / 365);
       days = (days - 1) % 365;
     }
-    int gd = days + 1;
-    int[] sal_a = { 0, 31, ((gy % 4 == 0 && gy % 100 != 0) || (gy % 400 == 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-    int gm;
-    for (gm = 0; gm < 13 && gd > sal_a[gm]; gm++) gd -= sal_a[gm];
+    int gm, gd = days + 1;
+    {
+      int[] sal_a = { 0, 31, ((gy % 4 == 0 && gy % 100 != 0) || (gy % 400 == 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+      for (gm = 0; gm < 13 && gd > sal_a[gm]; gm++) gd -= sal_a[gm];
+    }
     int[] gregorian = { gy, gm, gd };
     return gregorian;
   }
 
 }
+
+
 
