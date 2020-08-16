@@ -12,56 +12,47 @@ License: GNU/LGPL _ Open Source & Free :: Version: 2.80 : [2020=1399]
 1461=(365*4)+(4/4) & 146097=(365*400)+(400/4)-(400/100)+(400/400)  */
 
 long *gregorian_to_jalali(long gy, long gm, long gd, long out[]) {
-  long days;
+  out[0] = (gm > 2) ? (gy + 1) : gy;
   {
-    long gy2 = (gm > 2) ? (gy + 1) : gy;
     long g_d_m[12] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
-    days = 355666 + (365 * gy) + ((int)((gy2 + 3) / 4)) - ((int)((gy2 + 99) / 100)) + ((int)((gy2 + 399) / 400)) + gd + g_d_m[gm - 1];
+    out[3] = 355666 + (365 * gy) + ((int)((out[0] + 3) / 4)) - ((int)((out[0] + 99) / 100)) + ((int)((out[0] + 399) / 400)) + gd + g_d_m[gm - 1];
   }
-  long jy = -1595 + (33 * ((int)(days / 12053)));
-  days %= 12053;
-  jy += 4 * ((int)(days / 1461));
-  days %= 1461;
-  if (days > 365) {
-    jy += (int)((days - 1) / 365);
-    days = (days - 1) % 365;
+  out[0] = -1595 + (33 * ((int)(out[3] / 12053)));
+  out[3] %= 12053;
+  out[0] += 4 * ((int)(out[3] / 1461));
+  out[3] %= 1461;
+  if (out[3] > 365) {
+    out[0] += (int)((out[3] - 1) / 365);
+    out[3] = (out[3] - 1) % 365;
   }
-  out[0] = jy;
-  if (days < 186) {
-    out[1]/*jm*/ = 1 + (int)(days / 31);
-    out[2]/*jd*/ = 1 + (days % 31);
+  if (out[3] < 186) {
+    out[1]/*jm*/ = 1 + (int)(out[3] / 31);
+    out[2]/*jd*/ = 1 + (out[3] % 31);
   } else {
-    out[1]/*jm*/ = 7 + (int)((days - 186) / 30);
-    out[2]/*jd*/ = 1 + ((days - 186) % 30);
+    out[1]/*jm*/ = 7 + (int)((out[3] - 186) / 30);
+    out[2]/*jd*/ = 1 + ((out[3] - 186) % 30);
   }
   return out;
 }
 
 long *jalali_to_gregorian(long jy, long jm, long jd, long out[]) {
   jy += 1595;
-  long days = -355668 + (365 * jy) + (((int)(jy / 33)) * 8) + ((int)(((jy % 33) + 3) / 4)) + jd + ((jm < 7) ? (jm - 1) * 31 : ((jm - 7) * 30) + 186);
-  long gy = 400 * ((int)(days / 146097));
-  days %= 146097;
-  if (days > 36524) {
-    gy += 100 * ((int)(--days / 36524));
-    days %= 36524;
-    if (days >= 365) days++;
+  out[2] = -355668 + (365 * jy) + (((int)(jy / 33)) * 8) + ((int)(((jy % 33) + 3) / 4)) + jd + ((jm < 7) ? (jm - 1) * 31 : ((jm - 7) * 30) + 186);
+  out[0] = 400 * ((int)(out[2] / 146097));
+  out[2] %= 146097;
+  if (out[2] > 36524) {
+    out[0] += 100 * ((int)(--out[2] / 36524));
+    out[2] %= 36524;
+    if (out[2] >= 365) out[2]++;
   }
-  gy += 4 * ((int)(days / 1461));
-  days %= 1461;
-  if (days > 365) {
-    gy += (int)((days - 1) / 365);
-    days = (days - 1) % 365;
+  out[0] += 4 * ((int)(out[2] / 1461));
+  out[2] %= 1461;
+  if (out[2] > 365) {
+    out[0] += (int)((out[2] - 1) / 365);
+    out[2] = (out[2] - 1) % 365;
   }
-  long gd = days + 1;
-  long gm;
-  {
-    long sal_a[13] = {0, 31, ((gy % 4 == 0 && gy % 100 != 0) || (gy % 400 == 0)) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    for (gm = 0; gm < 13 && gd > sal_a[gm]; gm++) gd -= sal_a[gm];
-  }
-  out[0] = gy;
-  out[1] = gm;
-  out[2] = gd;
+  long sal_a[13] = {0, 31, ((out[0]%4 == 0 && out[0]%100 != 0) || (out[0]%400 == 0))?29:28 , 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+  for (out[2]++, out[1] = 0; out[1] < 13 && out[2] > sal_a[out[1]]; out[1]++) out[2] -= sal_a[out[1]];
   return out;
 }
 
@@ -94,7 +85,6 @@ int main() {
       jalali_to_gregorian(y_in, m_in, d_in, ymd_out);
       printf("gregorian: %ld/%ld/%ld \n", ymd_out[0], ymd_out[1], ymd_out[2]);
     }
-    
   }
   
   return 0;
@@ -122,12 +112,11 @@ int main() {
 	int gm=tarikh_g[1];
 	int gd=tarikh_g[2];
 	printf("%d/%d/%d\n",gy,gm,gd);
-	
-	//long* tarikh_g2=jalali_to_gregorian(1399,2,28,tarikh_g);
+
+  //long* tarikh_g2=jalali_to_gregorian(1399,2,28,tarikh_g);
   
   return 0;
 }
 */
-
 
 
