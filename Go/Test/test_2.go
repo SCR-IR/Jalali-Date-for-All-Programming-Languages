@@ -4,11 +4,11 @@ package main
 import "fmt" 
 
 func main() {
-  jy, jm, jd := gregorian_to_jalali(2020, 5, 17)
-  fmt.Printf( "Jalali: \t%d/%d/%d\n", jy, jm, jd)
+  j := gregorian_to_jalali(2020, 5, 17)
+  fmt.Printf( "Jalali: \t%d/%d/%d\n", j[0], j[1], j[2])
   
-  gy, gm, gd := jalali_to_gregorian(1399, 2, 28)
-  fmt.Printf( "Gregorian: \t%d/%d/%d\n", gy, gm, gd)
+  g := jalali_to_gregorian(1399, 2, 28)
+  fmt.Printf( "Gregorian: \t%d/%d/%d\n", g[0], g[1], g[2])
 }
 
 
@@ -24,8 +24,8 @@ License: GNU/LGPL _ Open Source & Free :: Version: 2.80 : [2020=1399]
 990=30*33 & 12053=(365*33)+(32/4) & 36524=(365*100)+(100/4)-(100/100)
 1461=(365*4)+(4/4) & 146097=(365*400)+(400/4)-(400/100)+(400/400)  */
 
-/* Multiple Return Values */
-func gregorian_to_jalali(gy int, gm int, gd int) (int, int, int) {
+/* Return Array */
+func gregorian_to_jalali(gy int, gm int, gd int) ([3]int) {
   var jy, jm, jd, gy2, days int
   var g_d_m = [12]int{0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334}
   if (gm > 2) {
@@ -49,11 +49,11 @@ func gregorian_to_jalali(gy int, gm int, gd int) (int, int, int) {
     jm = 7 + ((days - 186) / 30)
     jd = 1 + ((days - 186) % 30)
   }
-  return jy, jm, jd
+  return [3]int{jy, jm, jd}
 }
 
-/* Multiple Return Values */
-func jalali_to_gregorian(jy int, jm int, jd int) ( int, int, int) {
+/* Return Array */
+func jalali_to_gregorian(jy int, jm int, jd int) ([3]int) {
   var gy, gm, gd, days int
   var sal_a = [13]int{0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
   jy += 1595
@@ -88,7 +88,7 @@ func jalali_to_gregorian(jy int, jm int, jd int) ( int, int, int) {
     gd -= sal_a[gm]
     gm++
   }
-  return gy, gm, gd
+  return [3]int{gy, gm, gd}
 }
 
 
