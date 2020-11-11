@@ -1,32 +1,12 @@
-In The Name Of Allah _ به نام خدا
+# jalaliDate-JavaScript
 
-کدهای تبدیل تاریخ هجری شمسی (جلالی) به زبان های برنامه نویسی مختلف
+## bash (Linux shell) , کتابخانه‌ی تاریخ هجری شمسی (جلالی) برای زبان بش‌ لینوکس
 
-حتماً قبل از استفاده، آخرین نسخه را از نشانی زیر دریافت نمایید:
 
-http://jdf.scr.ir/
+> منبع اصلی: https://jdf.scr.ir/jdf/
 
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-Jalali Date Converters (Hijri Shamsi,Iranian,Persian)
-
-Please Download Last Version From:
-
-http://jdf.scr.ir/jdf/
-
-http://jdf.scr.ir/download/
-
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-حمایت مالی داوطلبانه به مبلغ دلخواه (ریال):
-
-https://scr.ir/pardakht/?hemayat=github
-
-(Donate)
-
-= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-
-### نشانی‌های جداگانه برای زبان‌های برنامه‌نویسی:
+### برای سایر زبان‌های برنامه‌نویسی:
 
 مـنـبـع | زبان | مخزن گیت‌هاب
 ---|---|---
@@ -47,4 +27,3 @@ https://scr.ir/pardakht/?hemayat=github
 [📗 منبع](https://jdf.scr.ir/jdf/?t=ruby) | Ruby | https://github.com/SCR-IR/jalaliDate-Ruby.git
 [📗 منبع](https://jdf.scr.ir/jdf/?t=swift) | Swift | https://github.com/SCR-IR/jalaliDate-Swift.git
 [📗 منبع](https://jdf.scr.ir/jdf/?t=visual_basic) | VisualBasic6 | https://github.com/SCR-IR/jalaliDate-VisualBasic.git
-[📗 منبع](https://jdf.scr.ir/jdf/?t=bash) | Bash | https://github.com/SCR-IR/jalaliDate-Bash.git
