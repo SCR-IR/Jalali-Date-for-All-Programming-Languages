@@ -5,7 +5,7 @@
  * @name: Hijri_Shamsi,Solar(Jalali) Date and Time Functions
  * @Author : Reza Gholampanahi & WebSite : http://jdf.scr.ir
  * @License: GNU/LGPL _ Open Source & Free : [all functions]
- * @Version: 2.75 =>[ 1399/03/18 = 1441/10/15 = 2020/06/07 ]
+ * @Version: 2.76 =>[ 1399/11/28 = 1442/07/04 = 2021/02/16 ]
  */
 
 /*	F	*/
