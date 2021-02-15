@@ -499,7 +499,7 @@ function jgetdate($timestamp = '', $none = '', $timezone = 'Asia/Tehran', $tn = 
 /*	F	*/
 function jcheckdate($jm, $jd, $jy) {
   list($jm, $jd, $jy) = explode('_', tr_num($jm . '_' . $jd . '_' . $jy));
-  $l_d = ($jm == 12 and ((($jy + 12) % 33) % 4) == 1) ? 29 : (31 - (int) ($jm / 6.5));
+  $l_d = ($jm == 12 and ((($jy + 12) % 33) % 4) != 1) ? 29 : (31 - (int) ($jm / 6.5));
   return ($jm > 12 or $jd > $l_d or $jm < 1 or $jd < 1 or $jy < 1) ? false : true;
 }
 
